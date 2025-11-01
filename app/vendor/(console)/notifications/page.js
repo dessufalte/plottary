@@ -101,11 +101,6 @@ export default function NotificationsPage() {
 
   return (
     <div className="mx-auto max-w-6xl p-6">
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-800">Notifikasi</h2>
-        <p className="text-sm text-gray-500">Update pesanan, review, dan info penting</p>
-      </div>
-
       {/* Header actions */}
       <div className="mb-4 flex items-center justify-between">
         <div className="text-sm text-gray-600">
@@ -206,8 +201,8 @@ export default function NotificationsPage() {
               </div>
 
               <div className="flex items-center gap-1 text-gray-400">
-                <button className="rounded p-1 hover:bg-gray-100" title="Pin">
-                  <Icon icon="mdi:pin-outline" width={18} />
+                <button className="rounded p-1 hover:bg-gray-100" title="Check">
+                  <Icon icon="material-symbols:check-rounded" width={18} />
                 </button>
                 <button className="rounded p-1 hover:bg-gray-100" title="Hapus">
                   <Icon icon="mdi:trash-can-outline" width={18} />

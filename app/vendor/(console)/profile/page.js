@@ -14,13 +14,7 @@ export default function VendorProfilePage() {
 
   return (
     <div className="p-8">
-      {/* Header */}
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-800">Profil Toko</h2>
-        <p className="text-sm text-gray-500">Kelola informasi toko Anda</p>
-      </div>
-
-      {/* Header Gradient */}
+   {/* Header Gradient */}
       <div className="mb-6 overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-700 to-emerald-400 p-8 text-white">
         <div className="flex items-center gap-6">
           <div className="relative">

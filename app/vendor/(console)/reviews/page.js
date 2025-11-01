@@ -55,11 +55,6 @@ export default function ReviewsPage() {
 
   return (
     <div className="p-8">
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-800">Statistik & Ulasan</h2>
-        <p className="text-sm text-gray-500">Lihat performa toko Anda</p>
-      </div>
-
       {/* Kartu ringkasan rating */}
       <div className="mb-6 grid gap-6 rounded-2xl border bg-white p-6 shadow-sm lg:grid-cols-[240px_1fr]">
         <div className="flex flex-col items-start lg:items-center">

@@ -44,22 +44,20 @@ export default function ProductsPage() {
 
   return (
     <div className="p-8">
-      {/* Header */}
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h2 className="text-lg font-semibold text-gray-800">Produk Saya</h2>
-          <p className="text-sm text-gray-500">Kelola produk yang Anda jual</p>
-        </div>
-        <Link
-          href="/vendor/products/add"
-          className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-white hover:bg-emerald-700"
-        >
-          <Icon icon="mdi:plus" width={18} />
-          Tambah Produk
-        </Link>
-      </div>
+    {/* Header */}
+    <div className="mb-6 flex items-center justify-between">
+        {/* Kiri: jumlah produk aktif */}
+        <p className="text-sm text-gray-500">{count} produk aktif</p>
 
-      <p className="mb-4 text-sm text-gray-500">{count} produk aktif</p>
+        {/* Kanan: tombol tambah produk */}
+        <Link
+            href="/vendor/products/add"
+            className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-white hover:bg-emerald-700"
+        >
+            <Icon icon="mdi:plus" width={18} />
+            Tambah Produk
+        </Link>
+    </div>
 
       {/* Grid 3 kolom */}
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3">

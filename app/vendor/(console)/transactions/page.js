@@ -112,13 +112,7 @@ export default function TransactionsPage() {
 
   return (
     <div className="p-8">
-      {/* Header */}
-      <div className="mb-6">
-        <h2 className="text-lg font-semibold text-gray-800">Transaksi</h2>
-        <p className="text-sm text-gray-500">Scan dan validasi kupon pelanggan</p>
-      </div>
-
-      {/* Banner validasi */}
+    {/* Banner validasi */}
       <div className="mb-6 rounded-2xl bg-gradient-to-r from-emerald-700 to-emerald-400 p-6 text-white">
         <div className="flex items-center gap-3">
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/15">
