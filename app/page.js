@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
+import OnboardingSlide from "./components/slide";
 
 // --- DATA UNTUK 3 SLIDE ONBOARDING ---
 const onboardingSlides = [
@@ -26,23 +27,6 @@ const onboardingSlides = [
   },
 ];
 
-// --- KOMPONEN SLIDE ONBOARDING ---  
-const OnboardingSlide = ({ slide }) => (
-  <div className="flex flex-col items-center p-8 text-center">
-    {slide.showIcon && (
-      <div className="mb-6">
-        <div className="bg-white p-4 rounded-full">
-          <div className="w-20 h-20 flex items-center justify-center ">
-            <div className="text-8xl">{slide.icon}</div>
-          </div>  
-        </div>
-      </div>
-    )}
-
-    <h2 className="text-xl font-semibold mb-3 text-gray-800">{slide.title}</h2>
-    <p className="text-md text-gray-600 px-4">{slide.description}</p>
-  </div>
-);
 
 // Halaman Onboarding Utama
 export default function App() {
@@ -56,7 +40,7 @@ export default function App() {
       setCurrentStep(currentStep + 1);
     } else {
       // Logic untuk navigasi ke halaman utama setelah slide terakhir
-      router.push('/home');
+      router.push('/landingPage');
       console.log("Navigasi ke Halaman Utama (/home)");
     }
   };
