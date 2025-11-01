@@ -1,137 +1,135 @@
-export const metadata = { title: "Vendor Home | Makmur" };
+"use client";
+import React from "react";
+import { Icon } from "@iconify/react";
 
-const metrics = [
-  { label: "Vendor Aktif", value: "2,500+", icon: "🏪" },
-  { label: "Kenaikan Revenue", value: "43%", icon: "📈" },
-  { label: "Pelanggan Baru/Bulan", value: "10K+", icon: "👥" },
-  { label: "Biaya Bergabung", value: "0%", icon: "💵" },
-];
+const Circle = ({ name, size = 22 }) => (
+  <span className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+    <Icon icon={name} width={size} height={size} />
+  </span>
+);
 
-const steps = [
-  {
-    no: 1,
-    img: "/step-upload.png", // taruh gambar di /public
-    title: "Upload Produk",
-    desc: "Tambahkan produk surplus dengan harga diskon. Atur foto, deskripsi, dan stok.",
-    icon: "📦",
-  },
-  {
-    no: 2,
-    img: "/step-expose.png",
-    title: "Raih Pelanggan",
-    desc: "Produk tampil di platform. Ribuan pengguna siap membeli produk Anda.",
-    icon: "🛍️",
-  },
-  {
-    no: 3,
-    img: "/step-analytics.png",
-    title: "Pantau Performa",
-    desc: "Scan QR pelanggan, validasi transaksi, dan lihat statistik real-time.",
-    icon: "📊",
-  },
-];
-
-const reasonsLeft = [
-  { title: "Tingkatkan Revenue", desc: "Ubah surplus jadi pendapatan tambahan. Rata-rata vendor naik 43%." },
-  { title: "Jangkau Pelanggan Baru", desc: "Akses ke 10.000+ pengguna aktif yang mencari produk hemat." },
-  { title: "Analytics Real-time", desc: "Pantau penjualan, rating, dan performa toko kapan saja." },
-];
-
-const reasonsRight = [
-  { title: "Mudah & Cepat", desc: "Dashboard intuitif, upload produk < 2 menit, scan & validasi otomatis." },
-  { title: "Aman & Terpercaya", desc: "Pembayaran otomatis, sistem QR terenkripsi, dukungan 24/7." },
-  { title: "Dampak Positif", desc: "Kurangi food waste sekaligus bantu selamatkan lingkungan." },
-];
-
-const features = [
-  { title: "Manajemen Produk", desc: "Tambah, edit, hapus produk dan atur stok/ harga real-time.", icon: "🧰" },
-  { title: "QR Scanner", desc: "Scan & validasi kupon pelanggan instan dengan QR.", icon: "� QR" },
-  { title: "Dashboard Analytics", desc: "Grafik interaktif untuk tren dan performa penjualan.", icon: "📈" },
-  { title: "Profil Toko", desc: "Kelola info toko, jam operasional, dan tampilan publik.", icon: "🏪" },
-];
-
-export default function VendorHome() {
+export default function VendorPage() {
   return (
-    <div className="bg-gray-50">
-      {/* HERO */}
+    <div className="bg-[#F6F8F7] min-h-screen">
+      {/* ===== HERO ===== */}
       <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
         <div className="grid items-center gap-8 md:grid-cols-2">
-          {/* left */}
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-sm text-emerald-700 ring-1 ring-emerald-100">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
-              Makmur Vendor Portal
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-emerald-100 text-emerald-700">
+                <Icon icon="mdi:store-outline" width={18} height={18} />
+              </span>
+              <span>Makmur Vendor Portal</span>
             </span>
 
-            <h1 className="mt-4 text-3xl font-semibold leading-tight md:text-4xl">
-              Selamat Datang, <span className="text-emerald-700">Warung Barokah</span>! 👋
+            <h1 className="mt-4 text-4xl font-semibold leading-tight">
+              Selamat Datang,{" "}
+              <span className="text-emerald-700">Warung Barokah</span>! 👋
             </h1>
-            <p className="mt-3 text-gray-600 max-w-prose">
-              Kurangi pemborosan makanan, tingkatkan pendapatan, dan raih lebih banyak pelanggan.
-              <span className="text-emerald-700"> Solusi cerdas untuk bisnis F&amp;B Anda.</span>
+            <p className="mt-3 max-w-prose text-gray-600">
+              Kurangi pemborosan makanan, tingkatkan pendapatan, dan raih lebih
+              banyak pelanggan.{" "}
+              <span className="text-emerald-700">
+                Solusi cerdas untuk bisnis F&amp;B Anda.
+              </span>
             </p>
 
-            <div className="mt-6 flex items-center gap-3">
-              <a
-                href="/vendor/products"
-                className="inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-white hover:opacity-95"
-              >
-                Mulai Kelola Toko
-                <span className="text-white">➜</span>
-              </a>
-              <a
-                href="/vendor/reports"
-                className="hidden md:inline-flex items-center gap-2 rounded-xl border px-5 py-3 text-gray-700 hover:bg-white"
-              >
-                Lihat Analytics
-              </a>
-            </div>
+            <a
+              href="/vendor/dashboard"
+              className="mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-white hover:opacity-95"
+            >
+              Mulai Kelola Toko
+              <Icon icon="mdi:arrow-right" width={18} />
+            </a>
           </div>
 
-          {/* right image */}
           <div className="relative">
             <img
               src="/hero.png"
-              alt="Vendor hero"
+              alt="Hero"
               className="w-full rounded-3xl object-cover shadow-xl"
             />
-            <div className="absolute left-4 top-4 rounded-xl bg-white/90 px-3 py-2 text-sm text-emerald-700 shadow">
-              Revenue Increase <span className="font-semibold">+43%</span>
+            <div className="absolute -bottom-6 left-8 rounded-xl bg-white px-4 py-3 text-sm text-emerald-700 shadow-xl ring-1 ring-emerald-100">
+              <div className="text-[11px] text-gray-600">Revenue Increase</div>
+              <div className="text-lg font-semibold">+43%</div>
             </div>
           </div>
         </div>
 
-        {/* metrics */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-          {metrics.map((m) => (
+        {/* ===== STATISTIK ===== */}
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+          {[
+            { icon: "mdi:store-outline", val: "2,500+", label: "Vendor Aktif" },
+            { icon: "mdi:chart-line", val: "43%", label: "Kenaikan Revenue" },
+            {
+              icon: "mdi:account-group-outline",
+              val: "10K+",
+              label: "Pelanggan Baru/Bulan",
+            },
+            { icon: "mdi:cash-multiple", val: "0%", label: "Biaya Bergabung" },
+          ].map((m) => (
             <div
               key={m.label}
-              className="rounded-2xl border border-emerald-100 bg-emerald-50/50 p-5"
+              className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-6 text-center"
             >
-              <div className="text-2xl">{m.icon}</div>
-              <div className="mt-3 text-2xl font-semibold text-emerald-800">{m.value}</div>
-              <div className="text-sm text-emerald-700/80">{m.label}</div>
+              <Circle name={m.icon} />
+              <div className="text-2xl font-semibold text-emerald-800">
+                {m.val}
+              </div>
+              <div className="text-sm text-emerald-700/80 mt-1">{m.label}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section className="mx-auto max-w-6xl px-4 pb-4">
-        <h2 className="mb-4 text-xl font-semibold">Cara Kerja untuk Vendor</h2>
-        <div className="grid gap-4 md:grid-cols-3">
-          {steps.map((s) => (
-            <article key={s.no} className="overflow-hidden rounded-2xl border bg-white shadow-sm">
+      {/* ===== CARA KERJA ===== */}
+      <section className="mx-auto max-w-6xl px-4 pb-6">
+        <h2 className="mb-8 text-center text-xl font-semibold">
+          Cara Kerja untuk Vendor
+        </h2>
+        <div className="grid gap-8 md:grid-cols-3">
+          {[
+            {
+              img: "/step-upload.png",
+              title: "Upload Produk",
+              desc: "Tambahkan produk surplus Anda dengan harga diskon.",
+              icon: "mdi:package-variant-closed",
+            },
+            {
+              img: "/step-expose.png",
+              title: "Raih Pelanggan",
+              desc: "Produk Anda otomatis tampil di platform dan dibeli pelanggan.",
+              icon: "mdi:account-group-outline",
+            },
+            {
+              img: "/step-analytics.png",
+              title: "Pantau Performa",
+              desc: "Lihat statistik penjualan dan validasi transaksi real-time.",
+              icon: "mdi:chart-box-outline",
+            },
+          ].map((s, i) => (
+            <article
+              key={s.title}
+              className="relative overflow-hidden rounded-2xl border bg-white shadow-sm"
+            >
+              {/* angka kiri atas */}
+              <div className="absolute top-3 left-3 z-10 grid h-8 w-8 place-items-center rounded-full bg-emerald-700 text-white text-sm font-semibold shadow">
+                {i + 1}
+              </div>
+
+              {/* gambar + ikon */}
               <div className="relative">
-                <img src={s.img} alt={s.title} className="h-40 w-full object-cover" />
-                <div className="absolute left-3 top-3 flex items-center gap-2 rounded-full bg-emerald-600 px-3 py-1 text-xs text-white">
-                  <span className="grid h-5 w-5 place-items-center rounded-full bg-emerald-500">
-                    {s.no}
-                  </span>
-                  {s.icon}
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  className="h-44 w-full object-cover"
+                />
+                <div className="absolute bottom-3 left-3 grid h-9 w-9 place-items-center rounded-xl bg-white text-emerald-700 shadow">
+                  <Icon icon={s.icon} width={20} height={20} />
                 </div>
               </div>
-              <div className="p-4">
+
+              <div className="p-5 text-center">
                 <h3 className="font-semibold">{s.title}</h3>
                 <p className="mt-1 text-sm text-gray-600">{s.desc}</p>
               </div>
@@ -140,66 +138,114 @@ export default function VendorHome() {
         </div>
       </section>
 
-      {/* WHY JOIN (GREEN BLOCK) */}
+      {/* ===== MENGAPA BERGABUNG ===== */}
       <section className="mx-auto max-w-6xl px-4 py-10">
-        <div className="rounded-3xl bg-emerald-700 p-6 text-emerald-50">
-          <h2 className="text-xl font-semibold">Mengapa Bergabung dengan Makmur?</h2>
-          <div className="mt-4 grid gap-6 md:grid-cols-2">
-            <ul className="space-y-4">
-              {reasonsLeft.map((r) => (
-                <li key={r.title} className="flex gap-3">
-                  <span className="mt-1 inline-block h-2 w-2 rounded-full bg-emerald-300" />
-                  <div>
-                    <div className="font-medium">{r.title}</div>
-                    <p className="text-emerald-100/90 text-sm">{r.desc}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <ul className="space-y-4">
-              {reasonsRight.map((r) => (
-                <li key={r.title} className="flex gap-3">
-                  <span className="mt-1 inline-block h-2 w-2 rounded-full bg-emerald-300" />
-                  <div>
-                    <div className="font-medium">{r.title}</div>
-                    <p className="text-emerald-100/90 text-sm">{r.desc}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+        <div className="rounded-3xl bg-gradient-to-b from-emerald-700 to-emerald-600 p-8 text-emerald-50">
+          <h2 className="mb-6 text-center text-xl font-semibold">
+            Mengapa Bergabung dengan Makmur?
+          </h2>
+          <div className="grid gap-x-10 gap-y-6 md:grid-cols-2">
+            {[
+              {
+                icon: "mdi:cash-multiple",
+                t: "Tingkatkan Revenue",
+                d: "Ubah produk surplus jadi pendapatan tambahan.",
+              },
+              {
+                icon: "mdi:flash-outline",
+                t: "Mudah & Cepat",
+                d: "Upload produk hanya butuh 2 menit.",
+              },
+              {
+                icon: "mdi:account-group-outline",
+                t: "Jangkau Pelanggan Baru",
+                d: "Akses 10.000+ pengguna aktif Makmur.",
+              },
+              {
+                icon: "mdi:shield-outline",
+                t: "Aman & Terpercaya",
+                d: "Pembayaran otomatis & dukungan 24/7.",
+              },
+              {
+                icon: "mdi:chart-box-outline",
+                t: "Analytics Real-time",
+                d: "Pantau performa toko Anda setiap saat.",
+              },
+              {
+                icon: "mdi:earth",
+                t: "Dampak Positif",
+                d: "Bantu kurangi food waste & jaga bumi.",
+              },
+            ].map((r) => (
+              <div key={r.t} className="flex items-start gap-3">
+                <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/15">
+                  <Icon icon={r.icon} width={20} height={20} />
+                </span>
+                <div>
+                  <div className="font-medium">{r.t}</div>
+                  <p className="text-emerald-100/90 text-sm">{r.d}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FEATURES */}
+      {/* ===== FITUR ===== */}
       <section className="mx-auto max-w-6xl px-4 pb-10">
-        <h2 className="mb-4 text-xl font-semibold">Fitur Lengkap untuk Vendor</h2>
-        <div className="grid gap-4 md:grid-cols-4 sm:grid-cols-2">
-          {features.map((f) => (
-            <div key={f.title} className="rounded-2xl border bg-white p-5 shadow-sm">
-              <div className="text-2xl">{f.icon}</div>
-              <div className="mt-3 font-semibold">{f.title}</div>
-              <p className="mt-1 text-sm text-gray-600">{f.desc}</p>
+        <h2 className="mb-4 text-center text-xl font-semibold">
+          Fitur Lengkap untuk Vendor
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+          {[
+            {
+              t: "Manajemen Produk",
+              d: "Tambah, edit, hapus produk dan atur stok real-time.",
+              icon: "mdi:package-variant-closed",
+            },
+            {
+              t: "QR Scanner",
+              d: "Validasi kupon pelanggan dengan QR code.",
+              icon: "mdi:qrcode-scan",
+            },
+            {
+              t: "Dashboard Analytics",
+              d: "Visualisasi penjualan & tren performa.",
+              icon: "mdi:chart-box-outline",
+            },
+            {
+              t: "Profil Toko",
+              d: "Kelola info toko & foto untuk menarik pelanggan.",
+              icon: "mdi:storefront-outline",
+            },
+          ].map((f) => (
+            <div
+              key={f.t}
+              className="rounded-2xl border bg-white p-6 text-center shadow-sm"
+            >
+              <Circle name={f.icon} />
+              <div className="mt-2 font-semibold">{f.t}</div>
+              <p className="mt-1 text-sm text-gray-600">{f.d}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CTA BOTTOM */}
+      {/* ===== CTA ===== */}
       <section className="mx-auto max-w-6xl px-4 pb-16">
-        <div className="items-center gap-6 rounded-3xl border bg-white p-6 md:flex">
-          <div className="flex-1">
-            <h3 className="text-lg font-semibold">Siap Mengembangkan Bisnis Anda?</h3>
-            <p className="mt-1 text-gray-600">
-              Mulai jual produk surplus dan tingkatkan revenue hari ini!
-            </p>
-          </div>
+        <div className="rounded-3xl border bg-white p-8 text-center">
+          <h3 className="text-lg font-semibold">
+            Siap Mengembangkan Bisnis Anda?
+          </h3>
+          <p className="mt-1 text-gray-600">
+            Mulai jual produk surplus dan tingkatkan revenue hari ini!
+          </p>
           <a
-            href="/vendor/products"
-            className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-white hover:opacity-95 md:mt-0"
+            href="/vendor/dashboard"
+            className="mx-auto mt-6 inline-flex items-center gap-2 rounded-xl bg-emerald-700 px-5 py-3 text-white hover:opacity-95"
           >
             Mulai Kelola Toko Sekarang
-            <span>➜</span>
+            <Icon icon="mdi:arrow-right" width={18} />
           </a>
         </div>
       </section>
