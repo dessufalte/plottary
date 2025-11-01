@@ -275,6 +275,28 @@ export default function AddProductPage() {
           )}
         </div>
 
+        {/* Berat */}
+        <div>
+          <label className="mb-2 block text-sm font-medium text-gray-700">
+            Berat (gr) *
+          </label>
+          <input
+            type="number"
+            min="1"
+            step="1"
+            name="weight"
+            value={form.weight}
+            onChange={onChange}
+            placeholder="100"
+            className={`w-full rounded-xl border px-4 py-2.5 text-sm outline-none ring-emerald-200 focus:bg-white focus:ring ${
+              errors.weight ? "bg-red-50 border-red-300" : "bg-gray-50"
+            }`}
+          />
+          {errors.weight && (
+            <p className="mt-1 text-sm text-red-600">{errors.weight}</p>
+          )}
+        </div>
+
         {/* Actions */}
         <div className="flex justify-center gap-3 pt-2">
           <Link
