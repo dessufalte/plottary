@@ -6,6 +6,7 @@ import SidebarLink from "../components/sideBar";
 import { Icon } from "@iconify/react";
 import Image from 'next/image';
 import Link from 'next/link';
+import SearchBar from '../components/searchBar';
 
 // --- DUMMY DATA ---
 const DUMMY_PRODUCTS = [
@@ -14,81 +15,91 @@ const DUMMY_PRODUCTS = [
     store: "Warung Berkah",
     rating: 4.5,
     time: "1m lalu",
-    discount: 57,
     title: "Nasi Goreng Spesial",
-    originalPrice: "Rp 35.000",
-    discountedPrice: "Rp 15.000",
     stock: 8,
-    image: "https://placehold.co/300x200/2E8B57/FFFFFF?text=Nasi+Goreng",
+    image: "/images/nasiGorengSpesial.png",
+    coupons: 2,
   },
   {
     id: 2,
     store: "Toko Roti Segar",
     rating: 4.8,
     time: "1m lalu",
-    discount: 60,
     title: "Roti Croissant",
-    originalPrice: "Rp 25.000",
-    discountedPrice: "Rp 10.000",
     stock: 12,
-    image: "https://placehold.co/300x200/A9F0C5/171717?text=Croissant",
+    image: "/images/croissant.png",
+    coupons: 1,
   },
   {
     id: 3,
     store: "Kafe Hijau",
     rating: 4.6,
     time: "1m lalu",
-    discount: 56,
     title: "Salad Bowl Organik",
-    originalPrice: "Rp 45.000",
-    discountedPrice: "Rp 20.000",
     stock: 5,
-    image: "https://placehold.co/300x200/171717/A9F0C5?text=Salad+Bowl",
+    image: "/images/saladBowlOrganik.png",
+    coupons: 2,
   },
   {
     id: 4,
     store: "Toko Roti Segar",
     rating: 4.7,
     time: "1m lalu",
-    discount: 60,
     title: "Donat Aneka Rasa",
-    originalPrice: "Rp 30.000",
-    discountedPrice: "Rp 12.000",
     stock: 6,
-    image: "https://placehold.co/300x200/2E8B57/FFFFFF?text=Donat",
+    image: "/images/donatAnekaRasa.png",
+    coupons: 1,
   },
   {
     id: 5,
     store: "Warung Berkah",
     rating: 4.4,
     time: "1m lalu",
-    discount: 55,
     title: "Ayam Geprek Jumbo",
-    originalPrice: "Rp 40.000",
-    discountedPrice: "Rp 18.000",
     stock: 10,
-    image: "https://placehold.co/300x200/A9F0C5/171717?text=Ayam+Geprek",
+    image: "/images/ayamGeprekJumbo.png",
+    coupons: 2,
   },
   {
     id: 6,
     store: "Kafe Hijau",
     rating: 4.5,
     time: "1m lalu",
-    discount: 54,
     title: "Sandwich Ayam",
-    originalPrice: "Rp 35.000",
-    discountedPrice: "Rp 16.000",
     stock: 7,
-    image: "https://placehold.co/300x200/171717/A9F0C5?text=Sandwich",
+    image: "/images/sandwichAyam.png",
+    coupons: 2,
   },
 ];
 
 // --- COMPONENTS ---
 
+// Komponen BELI KUPON MAKMUR  ---
+const BeliKuponMakmur = () => (
+    <div className="p-4 lg:p-6 bg-[#2E8B57] rounded-xl text-white shadow-lg flex justify-between items-center mb-6">
+        <div className="flex items-center gap-4">
+            {/* Ikon Kupon */}
+            <div className="bg-white/30 p-3 rounded-full flex items-center justify-center">
+                <Icon icon="lucide:ticket" width="24" height="24" />
+            </div>
+            {/* Teks Kupon */}
+            <div>
+                <h3 className="text-lg font-semibold">Beli Kupon Makmur</h3>
+                <p className="text-sm opacity-90">Dapatkan kupon untuk membeli makanan hemat</p>
+            </div>
+        </div>
+        {/* Tombol Beli Kupon */}
+        <Link href="/buyCoupon" className="flex items-center gap-2 bg-white text-[#2E8B57] font-semibold py-2 px-4 rounded-full shadow-md transition-transform hover:scale-105 active:scale-95">
+            <Icon icon="ic:round-plus" width="24" height="24" />
+            Beli Kupon
+        </Link>
+    </div>
+);
+
 // Komponen Kartu Produk
 const ProductCard = ({ product }) => (
   <Link 
-  href={`/product/${product.id}`}
+  href={`/products/${product.id}`}
   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300 transform hover:scale-[1.01] cursor-pointer">
     {/* Gambar Produk */}
     <div className="relative">
@@ -121,29 +132,34 @@ const ProductCard = ({ product }) => (
       <div className="flex items-center text-sm gap-2 text-gray-500 mb-1">
         <Icon icon="mynaui:location" width="24" height="24" />
         {product.store}
-        <Icon icon="mdi:star" width="24" height="24" className="text-yellow-500" />
+        <Icon
+          icon="mdi:star"
+          width="16"
+          height="16"
+          className="text-yellow-500 ml-2"
+        />
         {product.rating}
       </div>
 
-      <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
+      <h3 className="text-lg font-semibold text-gray-800 line-clamp-2 mb-2">
         {product.title}
       </h3>
 
-      {/* Harga & Status */}
-      <div className="mt-2">
-        <p className="text-sm text-gray-400 line-through">
-          {product.originalPrice}
-        </p>
-        <div className="flex justify-between items-center">
-          <p className="text-xl font-bold text-[#2E8B57]">
-            {product.discountedPrice}
-          </p>
-          <div className="flex items-center text-[#2E8B57] text-xs font-medium">
-            Layak Konsumsi 
-          </div>
+      {/* Bagian Kupon & Status */}
+      <div className="flex justify-between items-center mt-3">
+        {/* Kupon */}
+        <div className="flex items-center gap-1 bg-emerald-50 text-emerald-700 text-xs font-medium px-2 py-1 rounded-lg border border-emerald-100">
+          <Icon icon="mdi:ticket-percent-outline" width="16" height="16" />
+          <span>{product.coupons}</span>
         </div>
-        <p className="text-xs text-gray-600 mt-1">Stok: {product.stock} tersisa</p>
+
+        {/* Status */}
+        <div className="flex items-center text-[#2E8B57] text-xs font-medium bg-emerald-50 px-2 py-1 rounded-lg">
+          Layak
+        </div>
       </div>
+
+      <p className="text-xs text-gray-600 mt-2">Stok: {product.stock} tersisa</p>
     </div>
   </Link>
 );
@@ -160,39 +176,9 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="md:ml-64 bg-gray-50">
       {/* START: Sidebar */}
-      <aside className="w-64 flex flex-col justify-between bg-white border-r border-gray-200 p-6 shadow-lg">
-        <div>
-          {/* Logo & Judul */}
-          <div className="mb-10">
-            <div className="flex items-center gap-4 mb-8">
-                <Image src="images/logo.svg" alt="Makmur" width={28} height={28} />
-                <div>
-                <h1 className="font-semibold text-emerald-700">Makmur</h1>
-                <p className="text-xs text-gray-500">Vendor Portal</p>
-                </div>
-            </div>
-        </div>
-
-          {/* Navigasi Utama */}
-          <nav className="space-y-2">
-            <SidebarLink href={"/home"} icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></g></svg>} text="Home" isActive={true} />
-            <SidebarLink href={"/search"} icon={<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l5.6 5.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-5.6-5.6q-.75.6-1.725.95T9.5 16m0-2q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg>} text="Cari Produk" isActive={false} />
-          </nav>
-        </div>
-
-        {/* Footer Sidebar */}
-        <div>
-          <div className="border-t border-gray-200 pt-4">
-            <div className="flex items-center gap-2 text-red-600 text-sm font-medium hover:text-red-700 cursor-pointer">
-              <Icon icon="material-symbols:logout-rounded" width="24" height="24" />
-              Keluar
-            </div>
-          </div>
-          <p className="text-sm text-gray-300 mt-4">Makmur v1.0.0</p>
-        </div>
-      </aside>
+      <SidebarLink />
       {/* END: Sidebar */}
       <main className="flex-1 p-8 overflow-y-auto">
         {/* Header Dashboard */}
@@ -217,20 +203,15 @@ export default function Home() {
 
         {/* Search Bar */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 w-200 bg-gray-100 rounded-xl p-3">
-            <Icon icon="material-symbols:search-rounded" width="24" height="24" style={{color: '#6B7280'}} />
-            <input
-              type="text"
-              placeholder="Cari makanan atau toko..."
-              className="w-full bg-transparent focus:outline-none text-gray-700"
-            />
-          </div>
+          <SearchBar />
         </div>
+
+        <BeliKuponMakmur />
 
         {/* Promo Banner & Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
           {/* Promo Banner */}
-          <div className="lg:col-span-2 bg-gradient-to-t from-primary to-secondary rounded-2xl p-6 pb-10">
+          <div className="lg:col-span-2 bg-linear-to-t from-primary to-secondary rounded-2xl p-6 pb-10">
             <h3 className="text-xl font-semiBold text-black mb-2">
               Selamatkan Makanan Hari Ini 🌱
             </h3>

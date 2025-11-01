@@ -3,6 +3,7 @@
 import React from 'react';
 import StatCard from "../components/card";
 import Link from "next/link";
+import { Icon } from "@iconify/react";
 
 
 // --- Komponen Kartu Cara Kerja ---
@@ -32,7 +33,7 @@ const StepCard = ({ number, title, description, imageUrl }) => (
 // --- Komponen Keuntungan/Fitur ---
 const BenefitItem = ({ icon, title, description }) => (
   <div className="flex items-start mb-4">
-    <div className="flex-shrink-0 mr-3 mt-1">
+    <div className="shrink-0 mr-3 mt-1">
       {icon}
     </div>
     <div>
@@ -154,7 +155,7 @@ export default function Home() {
       </section>
 
       {/* 4. SECTION MENGAPA MEMILIH MAKMUR */}
-      <section className="bg-gradient-to-l from-primary to-[#1A6D42] text-white py-16 rounded-3xl mx-6 md:mx-16 lg:mx-36">
+      <section className="bg-linear-to-l from-primary to-[#1A6D42] text-white py-16 rounded-3xl mx-6 md:mx-16 lg:mx-36">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-medium text-white text-center mb-10">
             Mengapa Memilih Makmur?
@@ -163,12 +164,12 @@ export default function Home() {
             {/* Kolom Kiri: Keuntungan User */}
               <div>
                 <BenefitItem
-                  icon={<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 16a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0"/><path fill="currentColor" d="m14.347.66l3.18 4.456l2.097-.715L21.538 10h.962v12h-21V10h.51v-.01l.648.006zM9.397 10h10.028l-1.037-3.033l-1.522.487zM7.839 8.417L15.55 5.79l-1.604-2.25zM5.5 12h-2v2a2 2 0 0 0 2-2m10 4a3.5 3.5 0 1 0-7 0a3.5 3.5 0 0 0 7 0m5 4v-2a2 2 0 0 0-2 2zm-2-8a2 2 0 0 0 2 2v-2zm-15 8h2a2 2 0 0 0-2-2z"/></svg>}
+                  icon={<Icon icon="tdesign:money-filled" width="48" height="48"/>}
                   title="Hemat Hingga 70%"
                   description="Dapatkan makanan berkualitas dengan harga jauh lebih murah dari harga normal."
                 />
                 <BenefitItem
-                  icon={<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 512 512"><path fill="currentColor" d="M432 208H288l32-192L80 304h144l-32 192Z"/></svg>}
+                  icon={<Icon icon="ion:flash-sharp" width="48" height="48" />}
                   title="Cepat & Mudah"
                   description="Beli dan bayar kupon hanya dalam 90 detik, ambil di vendor terdekat."
                 />
@@ -176,12 +177,12 @@ export default function Home() {
             {/* Kolom Kanan: Dampak Lingkungan & Kepercayaan */}
               <div>
                 <BenefitItem
-                  icon={<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="M24 44c11.046 0 20-8.954 20-20S35.046 4 24 4S4 12.954 4 24s8.954 20 20 20" clip-rule="evenodd"/><path d="M4 24h40"/><path d="M24 44c4.418 0 8-8.954 8-20S28.418 4 24 4s-8 8.954-8 20s3.582 20 8 20" clip-rule="evenodd"/><path d="M9.858 10.142A19.94 19.94 0 0 0 24 16a19.94 19.94 0 0 0 14.142-5.858m0 27.716A19.94 19.94 0 0 0 24 32a19.94 19.94 0 0 0-14.142 5.858"/></g></svg>}
+                  icon={<Icon icon="mingcute:earth-2-fill" width="48" height="48"/>}
                   title="Selamatkan Bumi"
                   description="Bantu kurangi pemborosan makanan dan dampak lingkungan dari food waste."
                 />
                 <BenefitItem
-                  icon={<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m-.232-5.36l5-6l-1.536-1.28l-4.3 5.159l-2.225-2.226l-1.414 1.414l3 3l.774.774z" clip-rule="evenodd"/></svg>}
+                  icon={<Icon icon="mdi:check-circle" width="48" height="48" />}
                   title="Terpercaya"
                   description="Semua vendor terverifikasi dan produk dijamin layak konsumsi."
                 />

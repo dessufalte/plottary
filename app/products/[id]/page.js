@@ -1,251 +1,207 @@
 "use client";
 
-import React from 'react';
 import { Icon } from "@iconify/react";
-import Link from 'next/link';
+import { useRouter } from "next/navigation";
 
-// Data Dummy untuk detail produk
-const productDetail = {
-  id: 'roti-croissant',
-  name: 'Roti Croissant',
-  store: 'Toko Roti Segar',
-  rating: 4.8,
-  reviews: 45,
-  description: 'Croissant butter premium, dipanggang pagi ini.',
-  imageUrl: 'https://placehold.co/600x400/DDA0DD/FFFFFF?text=Roti+Croissant',
-  discountPercent: 60,
-  normalPrice: 25000,
-  discountPrice: 10000,
-  stock: 12,
-  validityDate: '29 Oktober 2025',
-  validityTime: 'pukul 06.00',
-  pickupDeadline: '29 Oktober 2025 pukul 17.00',
-  isConsumable: true,
-  // Simulasi ulasan
-  reviewsData: [
-    { name: 'Dewi Lestari', rating: 5, date: '28 Oktober 2025', comment: 'Croissantnya masih lembut dan harum! Cocok buat sarapan. Packaging juga rapih.', metrics: { rasa: 5, kebersihan: 5, kesegaran: 5 } },
-    { name: 'Rina Wijaya', rating: 4, date: '27 Oktober 2025', comment: 'Enak, tapi teksturnya udah agak kurang crispy. Tapi harga segini sih oke banget!', metrics: { rasa: 4, kebersihan: 5, kesegaran: 4 } },
-  ]
+// Komponen Fungsional untuk format harga
+const formatRupiah = (amount) => {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+    }).format(amount);
 };
 
-// Komponen Pembagi Rating Bintang
-const StarRating = ({ rating }) => {
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 !== 0;
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+// Data Dummy untuk Simulasi
+const DUMMY_PRODUCT = {
+    id: 1,
+    name: "Salad Bowl Organik",
+    vendor: "Kafe Hijau",
+    rating: 4.6,
+    originalPrice: 45000,
+    discountedPrice: 20000,
+    discountPercentage: 56,
+    imageUrl: "/images/saladBowlOrganik.png",
+    description: "Salad segar dengan sayuran organik dan dressing pilihan. Cocok untuk diet sehat Anda.",
+    couponCount: 2,
+    stock: 4,
+    vendorInitial: "K",
+    pickupTime: "09:00 - 16:00",
+    validUntil: "29 Oktober 2025 pukul 16.00",
+    vendorLocation: "Kafe Hijau",
+    savedAmount: 45000 - 20000,
+};
+
+const VendorCard = ({ product }) => {
+  const router = useRouter(); 
+  
+  const handleVendorClick = () => {
+    console.log(`Navigasi ke Detail Toko: /vendors/${product.vendorId}`);
+    router.push(`/storeDetail/${product.vendorId}`);
+  };
 
   return (
-    <div className="flex items-center space-x-0.5">
-      {/* Bintang penuh */}
-      {[...Array(fullStars)].map((_, i) => (
-        <Icon
-          key={`full-${i}`}
-          icon="mdi:star"
-          width="20"
-          height="20"
-          className="text-yellow-500"
-        />
-      ))}
-
-      {/* Setengah bintang */}
-      {hasHalfStar && (
-        <Icon
-          icon="mdi:star-half-full"
-          width="20"
-          height="20"
-          className="text-yellow-500"
-        />
-      )}
-
-      {/* Bintang kosong */}
-      {[...Array(emptyStars)].map((_, i) => (
-        <Icon
-          key={`empty-${i}`}
-          icon="mdi:star-outline"
-          width="20"
-          height="20"
-          className="text-gray-300"
-        />
-      ))}
-    </div>
+    <button
+      onClick={handleVendorClick}
+      className="w-full bg-white p-4 my-4 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between transition hover:shadow-md active:bg-gray-50 cursor-pointer"
+    >
+      <div className="flex items-center gap-3">
+        {/* Lingkaran Inisial Vendor */}
+        <div className="w-10 h-10 bg-linear-to-b from-[#2E8B57] to-[#A3D9B8] bg-opacity-10 text-white rounded-full flex items-center justify-center font-bold">
+          {product.vendorInitial}
+        </div>
+        
+        {/* Detail Toko */}
+        <div className="text-left">
+          <h3 className="font-medium text-gray-800 ml-2">{product.vendor}</h3>
+          <div className="flex items-center text-sm text-gray-500 gap-2 mt-0.5">
+            <Icon icon="mynaui:location" width="24" height="24"  style={{color: '#2E8B57'}} />
+            <span>Lihat detail toko</span>
+            <Icon icon="material-symbols:star" width="24" height="24"  style={{color: "ecc94b"}} />
+            <span>{product.rating}</span>
+          </div>
+        </div>
+      </div>
+      
+      {/* Tombol Panah */}
+      <Icon icon="material-symbols:chevron-right-rounded" width="24" height="24" />
+    </button>
   );
 };
 
-// Komponen Metrik Ulasan
-const ReviewMetrics = ({ metrics }) => (
-  <div className="text-sm text-gray-600 mt-2 flex flex-wrap gap-x-4 gap-y-1">
-    {Object.entries(metrics).map(([key, value]) => (
-      <span key={key} className="capitalize">
-        {key}: <span className="font-semibold">{value}/5</span>
-      </span>
-    ))}
-  </div>
-);
+// --- Komponen Utama ---
+export default function ProductDetailPage() {
+    const product = DUMMY_PRODUCT;
+    const router = useRouter();
 
-// Komponen Utama Halaman Detail
-const ProductDetailPage = () => {
-  const { 
-    name, store, rating, reviews, description, imageUrl, 
-    discountPercent, normalPrice, discountPrice, stock, 
-    validityDate, validityTime, pickupDeadline, isConsumable, 
-    reviewsData 
-  } = productDetail;
+    const handleBuyCoupon = () => {
+        console.log(`Beli kupon untuk produk: ${product.name}`);
+        router.push(`/checkout?productId=${product.id}`);
+    };
 
-  const savingAmount = normalPrice - discountPrice;
-
-  return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      {/* Header Navigasi */}
-      <header className="fixed top-0 left-0 w-full bg-white shadow-sm z-10">
-        <div className="max-w-4xl ml-10 px-4 py-4 flex items-center">
-          <button 
-            onClick={() => window.history.back()}
-            className="text-gray-700 hover:text-gray-900 mr-4 flex gap-2 cursor-pointer"
-          >
-            <Icon icon="mdi:arrow-left" width="24" height="24" />
-            <h1 className="text-lg font-medium">Kembali</h1>
-          </button>
-        </div>
-      </header>
-
-      <main className="mx-auto pt-20 px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-10">
-          {/* Kolom Kiri: Gambar dan Detail Produk */}
-          <div className="lg:col-span-1 space-y-6 lg:sticky top-24 self-start">
-            {/* Bagian Gambar */}
-            <div className="relative rounded-xl overflow-hidden shadow-lg lg:w-[800px]">
-              <img 
-                src="/images/croissant.png"
-                alt="Roti Croissant" 
-                className="w-full h-full object-cover"
-               
-              />
-              <span className="absolute top-5 left-5 bg-primary text-white text-md font-bold px-6 py-4 rounded-xl shadow-md">
-                Hemat {discountPercent}%
-              </span>
-            </div>
-          </div>
-
-          {/* Kolom Kanan: Informasi Waktu, Harga, dan Ulasan */}
-          <div className="lg:col-span-1 space-y-6">
-
-            {/* Bagian Deskripsi */}
-            <div className="bg-white p-6 rounded-xl shadow">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">{name}</h2>
-              <div className="flex items-center text-sm text-gray-600 mb-4">
-                <Icon icon="mynaui:location" width="24" height="24" />
-                <span className="mr-4 ml-2">{store}</span>
-                <Icon icon="mdi:star" width="24" height="24" className="text-yellow-500" />
-                <span className="ml-1 text-xs text-gray-500">({reviews} ulasan)</span>
-                {isConsumable && (
-                  <span className="ml-4 flex items-center text-xs font-semibold text-green-600">
-                     Layak Konsumsi
-                  </span>
-                )}
-              </div>
-                <h3 className="text-lg font-bold text-gray-800">Deskripsi</h3>
-                <p className="text-gray-700">{description}</p>
-            </div>
-
-            {/* Detail Waktu */}
-            <div className="bg-white p-6 rounded-xl shadow space-y-4">           
-              <div className="flex items-start text-gray-600">
-                <div>
-                  <p className="text-sm font-semibold">Tanggal Produksi</p>
-                  <p className="text-md font-medium text-gray-800">{validityDate} {validityTime}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start text-gray-600">
-                <div>
-                  <p className="text-sm font-semibold text-red-600">Batas Kelayakan</p>
-                  <p className="text-md font-medium text-gray-800">{pickupDeadline}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Detail Harga dan Penghematan */}
-            <div className="bg-gradient-to-l from-secondary to-white p-6 rounded-xl">
-              <h3 className="text-lg font-bold text-gray-800 mb-3">Harga</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between text-gray-600">
-                  <span>Harga Normal</span>
-                  <span className="line-through">Rp {normalPrice.toLocaleString('id-ID')}</span>
-                </div>
-                <div className="flex justify-between text-lg font-bold text-green-700">
-                  <span>Harga Hemat</span>
-                  <span>Rp {discountPrice.toLocaleString('id-ID')}</span>
-                </div>
-                <div className="border-t border-green-300 pt-3 flex justify-between font-bold text-green-900">
-                  <span>Penghematan Anda</span>
-                  <span>Rp {savingAmount.toLocaleString('id-ID')}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Syarat & Ketentuan */}
-            <div className="bg-yellow p-6 rounded-xl">
-              <h3 className="text-lg font-bold text-black mb-3">Syarat & Ketentuan</h3>
-              <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-                <li>Kupon berlaku untuk $1$ porsi.</li>
-                <li>Kupon tidak dapat diuangkan kembali.</li>
-                <li>Tunjukkan QR code saat pengambilan.</li>
-                <li>Ambil sebelum batas waktu berlaku.</li>
-              </ul>
-              <p className="mt-3 text-right text-sm font-semibold text-gray-700">
-                Tersisa {stock} porsi
-              </p>
-            </div>
-
-            {/* Ulasan Pembeli */}
-            <div className="bg-white p-6 rounded-xl shadow">
-              <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
-                Ulasan Pembeli 
-                <span className="ml-3 text-base text-yellow-600 flex items-center">
-                  {rating} 
-                </span>
-                <span className="ml-2 text-sm text-gray-500">({reviews} ulasan)</span>
-              </h3>
-              
-              <div className="space-y-6">
-                {reviewsData.map((review, index) => (
-                  <div key={index} className="border-t pt-4 first:border-t-0 first:pt-0">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center">
-                        <div className="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3">
-                          {review.name.charAt(0)}
-                        </div>
-                        <div>
-                          <p className="font-semibold text-gray-800">{review.name}</p>
-                          <StarRating rating={review.rating} />
-                        </div>
-                      </div>
-                      <span className="text-xs text-gray-500">{review.date}</span>
-                    </div>
-                    <p className="text-gray-700 mb-2">{review.comment}</p>
-                    <ReviewMetrics metrics={review.metrics} />
-                  </div>
-                ))}
-              </div>
-            </div>
+    return (
+        <div className="min-h-screen bg-gray-50 flex flex-col items-center">
             
-          </div>
-        </div>
-      </main>
+            <header className="fixed top-0 left-0 w-full bg-white shadow-sm z-10">
+                <div className="max-w-4xl ml-10 px-4 py-4 flex items-center">
+                  <button 
+                    onClick={() => window.history.back()}
+                    className="text-gray-700 hover:text-gray-900 mr-4 flex gap-4 cursor-pointer"
+                  >
+                    <Icon icon="mdi:arrow-left" width="24" height="24" />
+                    <h1 className="text-lg font-medium">Detail Produk</h1>
+                  </button>
+                </div>
+            </header>
 
-      {/* Footer Tombol Aksi */}
-      <footer className="fixed bottom-0 left-0 w-full bg-white shadow-2xl p-4 border-t border-gray-100 z-10">
-        <div className="max-w-4xl mx-auto flex justify-center">
-          <button 
-            onClick={() => console.log('Beli Kupon Sekarang ditekan')}
-            className="w-full max-w-lg py-3 bg-green-700 text-white font-bold text-lg rounded-xl shadow-lg transition transform hover:bg-green-800 active:scale-[0.99]"
-          >
-            Beli Kupon Sekarang
-          </button>
-        </div>
-      </footer>
-    </div>
-  );
-};
+            <main className="flex-1 w-full max-w-4xl pt-16 pb-10">
+                
+                <div className="bg-white shadow-xl rounded-lg overflow-hidden">
+                    
+                    {/* Gambar Produk */}
+                    <div className="relative">
+                        <img 
+                            src={product.imageUrl} 
+                            alt={product.name} 
+                            className="w-full object-cover max-h-96" 
+                            onError={(e) => e.target.src = 'https://placehold.co/600x400/90EE90/333333?text=Gambar+Tidak+Tersedia'}
+                        />
+                        <span className="absolute top-4 right-4 bg-primary text-white text-sm font-bold px-2 py-1 rounded-lg">
+                            -{product.discountPercentage}%
+                        </span>
+                    </div>
 
-export default ProductDetailPage;
+                    {/* Konten Detail */}
+                    <div className="p-6 space-y-6">
+                        
+                        {/* Nama & Harga */}
+                        <div className="flex justify-between items-start">
+                            <div>
+                                <h2 className="text-2xl font-medium text-gray-900">{product.name}</h2>
+                                <div className="flex gap-2 items-center text-sm text-gray-500 mt-1">
+                                    <Icon icon="mynaui:location" width="24" height="24"  style={{color: '#2E8B57'}} />
+                                    <span>{product.vendor}</span>
+                                    <span className="mx-2">•</span>
+                                    <span className="flex items-center text-yellow-500">
+                                        ★ {product.rating} <span className="text-gray-400 ml-1">({product.couponCount} Kupon)</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <span className="flex items-center bg-[#2E8B57] text-white text-xs font-semibold px-2 py-1 rounded-full ml-4">
+                            <Icon icon="mdi:ticket" width="24" height="24" className="text-white mr-3" />
+                            2 Kupon
+                            </span>
+                        </div>
+
+                        {/* Harga */}
+                        <div className="mb-4">
+                            <p className="text-3xl font-bold text-[#2E8B57] inline-block mr-3">
+                                {formatRupiah(product.discountedPrice)}
+                            </p>
+                            <span className="text-lg text-gray-400 line-through">
+                                {formatRupiah(product.originalPrice)}
+                            </span>
+                        </div>
+
+                        {/* Kartu Toko (VendorCard) */}
+                        <VendorCard product={product} />
+
+                        {/* Alert Hemat */}
+                        <div className="bg-yellow-100 border border-yellow-500 text-yellow-800 p-3 rounded-md">
+                            <p className="flex items-center text-sm font-medium gap-4">
+                                Hemat {formatRupiah(product.savedAmount)} dengan kupon ini!
+                            </p>
+                        </div>
+
+                        {/* Waktu Pickup & Berlaku Hingga */}
+                        <div className="grid grid-cols-2 gap-4 bg-gray-100 p-4 rounded-lg">
+                            <div className="gap-4 flex items-center text-sm text-gray-700">
+                                <Icon icon="tabler:clock" width="24" height="24"  style={{color: '#232323'}} />
+                                <div>
+                                    <p className="font-medium">Jam Pickup</p>
+                                    <p>{product.pickupTime}</p>
+                                </div>
+                            </div>
+                            <div className="gap-4 flex items-center text-sm text-gray-700">
+                                <Icon icon="material-symbols:check-rounded" width="24" height="24"  style={{color: '#232323'}} />
+                                <div>
+                                    <p className="font-medium">Batas Kelayakan</p>
+                                    <p>{product.validUntil}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Lokasi Pickup */}
+                        <div className="pt-2">
+                            <h3 className="text-md font-semibold text-gray-800 mb-2">Lokasi Pickup</h3>
+                            <div className="gap-4 bg-gray-100 p-3 rounded-lg flex items-center text-gray-700">
+                                <Icon icon="mynaui:location" width="24" height="24"  style={{color: '#2E8B57'}} />
+                                {product.vendorLocation}
+                            </div>
+                        </div>
+
+                        {/* Deskripsi & Sisa Porsi */}
+                        <div className="pt-2 pb-4">
+                            <h3 className="text-md font-semibold text-gray-800 mb-2">Deskripsi</h3>
+                            <p className="text-gray-600 mb-4">{product.description}</p>
+                            
+                            {/* Sisa Porsi Alert */}
+                            <div className="bg-yellow-100 border border-yellow-500 text-yellow-800 p-3 rounded-md">
+                                <p className="text-sm font-medium">
+                                    Tersisa {product.stock} porsi
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={handleBuyCoupon}
+                            className="w-full py-3 bg-[#2E8B57] text-white font-bold text-lg rounded-xl shadow-lg hover:bg-emerald-700 transition duration-200"
+                        >
+                            Beli dengan Kupon
+                        </button>
+
+                    </div>
+                </div>
+            </main>
+        </div>
+    );
+}
