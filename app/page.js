@@ -53,8 +53,8 @@ export default function App() {
 
   const handleSkip = () => {
     // Logic untuk melewati Onboarding
-    router.push('/home');
-    console.log("Onboarding Dilewati! Navigasi ke Halaman Utama (/home)");
+    router.push('/landingPage');
+    console.log("Onboarding Dilewati! Navigasi ke Halaman Landing Page");
   };
 
   return (

@@ -2,6 +2,8 @@
 
 import React from 'react';
 import StatCard from "../components/card";
+import Link from "next/link";
+
 
 // --- Komponen Kartu Cara Kerja ---
 const StepCard = ({ number, title, description, imageUrl }) => (
@@ -40,6 +42,7 @@ const BenefitItem = ({ icon, title, description }) => (
   </div>
 );
 
+
 // --- KOMPONEN UTAMA LANDING PAGE ---
 export default function Home() {
 
@@ -64,14 +67,14 @@ export default function Home() {
             <p className="text-lg text-gray-600 mb-8">
               Platform yang menghubungkan Anda dengan makanan berkualitas dengan harga hemat, sekaligus<span className='text-primary'> mengurangi pemborosan makanan</span> untuk masa depan yang lebih berkelanjutan.
             </p>
-            <button
-              className={`flex items-center px-6 py-3 font-semibold text-white rounded-lg shadow-md transition duration-300 bg-primary gap-2 hover:bg-green-700`}
-              onClick={() => console.log('Simulasi navigasi ke halaman belanja')}
+            <Link
+              className="flex w-72 items-center px-6 py-4 font-semibold text-white rounded-lg shadow-md transition duration-300 bg-primary gap-2 hover:bg-green-700"
+              href={"/home"}
             >
               Mulai Belanja Sekarang
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 9"><path fill="currentColor" d="M12.5 5h-9c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h9c.28 0 .5.22.5.5s-.22.5-.5.5"/><path fill="currentColor" d="M10 8.5a.47.47 0 0 1-.35-.15c-.2-.2-.2-.51 0-.71l3.15-3.15l-3.15-3.15c-.2-.2-.2-.51 0-.71s.51-.2.71 0l3.5 3.5c.2.2.2.51 0 .71l-3.5 3.5c-.1.1-.23.15-.35.15Z"/>
               </svg>
-            </button>
+            </Link>
           </div>
 
           {/* Kolom Kanan: Gambar Hero */}
@@ -194,14 +197,14 @@ export default function Home() {
         <p className="text-lg text-gray-600 mb-6">
           Jelajahi ribuan produk hemat dari vendor terdekat sekarang!
         </p>
-        <button
-          className={`flex items-center mx-auto px-8 py-3 font-bold text-white rounded-lg shadow-lg transition duration-300 bg-primary hover:bg-green-700`}
-          onClick={() => console.log('Simulasi navigasi ke daftar produk')}
+        <Link
+         className="flex w-72 justify-center items-center mx-auto px-6 py-4 font-semibold text-white rounded-lg shadow-md transition duration-300 bg-primary gap-2 hover:bg-green-700"
+              href={"/home"}
         >
           Lihat Produk Tersedia
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 9"><path fill="currentColor" d="M12.5 5h-9c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h9c.28 0 .5.22.5.5s-.22.5-.5.5"/><path fill="currentColor" d="M10 8.5a.47.47 0 0 1-.35-.15c-.2-.2-.2-.51 0-.71l3.15-3.15l-3.15-3.15c-.2-.2-.2-.51 0-.71s.51-.2.71 0l3.5 3.5c.2.2.2.51 0 .71l-3.5 3.5c-.1.1-.23.15-.35.15Z"/>
           </svg>
-        </button>
+        </Link>
       </section>
     </div>
   );

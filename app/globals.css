@@ -5,9 +5,13 @@
   --foreground: #171717;
   --primary: #2E8B57;
   --secondary: #A9F0C5;
+  --black: #232323;
+  --yellow: #FEF3C7;
 }
 
 @theme inline {
+  --color-yellow: var(--yellow);
+  --color-black: var(--black);
   --color-secondary: var(--secondary);
   --color-primary: var(--primary);
   --color-background: var(--background);
