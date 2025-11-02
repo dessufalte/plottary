@@ -102,9 +102,9 @@ const storeData = {
   rating: 4.6,
   description: "Restoran keluarga dengan masakan tradisional Indonesia yang lezat dan terjangkau. Kami berkomitmen untuk menyajikan makanan berkualitas dengan harga yang ramah di kantong.",
   stats: [
-    { id: 1, title: "Popularitas Toko", value: "85%", iconName: "TrendingUp", color: "text-blue-600" },
+    { id: 1, title: "Popularitas Toko", value: "85%", iconName: "TrendingUp", color: "text-primary" },
     { id: 2, title: "Total Produk", value: "12", iconName: "Package", color: "text-gray-600" },
-    { id: 3, title: "Terjual Hari Ini", value: "23", iconName: "Star", color: "text-yellow-600" },
+    { id: 3, title: "Terjual Hari Ini", value: "23", iconName: "Star", color: "text-yellow-400" },
   ],
   info: [
     { id: 1, iconName: "MapPin", label: "Alamat", value: "Jl. Sudirman No. 123, Jakarta Pusat" },

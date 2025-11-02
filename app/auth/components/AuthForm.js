@@ -34,8 +34,8 @@ export default function AuthForm({ mode = "login", defaultRole = "buyer" }) {
     <div>
       {/* Brand */}
       <div className="text-center mb-6">
-        <div className="mx-auto mb-3 h-10 w-10 rounded-full bg-white/30 grid place-items-center">
-          <span className="text-2xl">🌱</span>
+        <div className="mx-auto mb-3 grid place-items-center">
+          <img src="/images/logo.svg" alt="Makmur Logo" className="w-12 h-12" />
         </div>
         <h1 className="text-2xl text-black font-semibold">Makmur</h1>
         <p className="text-sm text-gray-600">Selamatkan makanan, hemat pengeluaran</p>
@@ -64,7 +64,7 @@ export default function AuthForm({ mode = "login", defaultRole = "buyer" }) {
             <div className="space-y-1">
               <label className="text-sm text-gray-700">Nama Vendor</label>
               <input
-                className="w-full rounded-xl border px-3 py-3 bg-gray-50"
+                className="w-full rounded-xl border px-3 py-3 placeholder-gray-500 text-black bg-gray-50"
                 placeholder="Contoh: Warung Makmur"
                 value={vendorName}
                 onChange={(e) => setVendorName(e.target.value)}
@@ -77,7 +77,7 @@ export default function AuthForm({ mode = "login", defaultRole = "buyer" }) {
           <div className="space-y-1">
             <label className="text-sm text-gray-700">Email</label>
             <input
-              className="placeholder-gray-300 w-full rounded-xl border px-3 py-3 bg-gray-50"
+              className="placeholder-gray-500 text-black w-full rounded-xl border px-3 py-3 bg-gray-50"
               placeholder="vendor@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -89,7 +89,7 @@ export default function AuthForm({ mode = "login", defaultRole = "buyer" }) {
           <div className="space-y-1">
             <label className="text-sm text-gray-700">Password</label>
             <input
-              className="placeholder-gray-300 w-full rounded-xl border px-3 py-3 bg-gray-50"
+              className="placeholder-gray-500 text-black w-full rounded-xl border px-3 py-3 bg-gray-50"
               placeholder="••••••••"
               value={pwd}
               onChange={(e) => setPwd(e.target.value)}
@@ -99,6 +99,7 @@ export default function AuthForm({ mode = "login", defaultRole = "buyer" }) {
           </div>
 
           <button
+            
             type="submit"
             className="w-full rounded-xl bg-[#2E8B57] px-4 py-3 text-white font-medium hover:opacity-95 active:opacity-90"
           >

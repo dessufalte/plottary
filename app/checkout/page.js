@@ -114,27 +114,46 @@ const PaymentSuccessModal = ({ order, onClose }) => {
 
 // --- Komponen Utama ---
 export default function CheckoutPage() {
-    const [email, setEmail] = useState('contoh@email.com');
-    const [couponId, setCouponId] = useState('');
+    const [email, setEmail] = useState("");
+    const [couponId, setCouponId] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [couponError, setCouponError] = useState("");
     const [showConfirmation, setShowConfirmation] = useState(false);
     const order = DUMMY_ORDER;
     const finalPrice = order.totalPrice;
     
     // const router = useRouter(); // Uncomment ini untuk navigasi nyata
 
-    const handleVerification = () => {
-        // Logika verifikasi kupon di sini
-        if (couponId === 'MAKMUR-A1B2C3D4') {
-            console.log("Kupon Terverifikasi!");
-            // Anda dapat menambahkan logika state di sini (e.g., setCouponVerified(true))
-        } else {
-            console.log("ID Kupon tidak valid.");
-        }
-    };
+    // Validasi Email
+    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     const handlePayment = () => {
+        let valid = true;
+        setEmailError("");
+        setCouponError("");
+
+        // Validasi email
+        if (!email.trim()) {
+        setEmailError("Email wajib diisi.");
+        valid = false;
+        } else if (!isValidEmail(email)) {
+        setEmailError("Format email tidak valid.");
+        valid = false;
+        }
+
+        // Validasi ID Kupon
+        if (!couponId.trim()) {
+        setCouponError("ID kupon wajib diisi.");
+        valid = false;
+        } else if (couponId.trim().toUpperCase() !== "MAKMUR-A1B2C3D4") {
+        setCouponError("ID kupon tidak valid.");
+        valid = false;
+        }
+
+        if (!valid) return;
+
         console.log(`Pembayaran Rp ${finalPrice} berhasil!`);
-        setShowConfirmation(true); 
+        setShowConfirmation(true);
     };
 
     return (
@@ -220,9 +239,14 @@ export default function CheckoutPage() {
                             type="email"
                             id="email"
                             onChange={(e) => setEmail(e.target.value)}
-                            className="placeholder-gray-400 w-full p-2 border border-gray-300 rounded-lg focus:ring-[#2E8B57] focus:border-[#2E8B57] transition"
+                            className={`placeholder-gray-400 text-black w-full p-2 border rounded-lg focus:ring-[#2E8B57] focus:border-[#2E8B57] transition ${
+                                emailError ? "border-red-500" : "border-gray-300"
+                            }`}
                             placeholder="contoh@email.com"
                         />
+                        {emailError && (
+                        <p className="text-red-600 text-xs mt-1">{emailError}</p>
+                        )}
                         <p className="text-xs text-gray-500">Voucher QR code akan dikirimkan ke email ini</p>
                     </div>
 
@@ -233,16 +257,15 @@ export default function CheckoutPage() {
                             <input
                                 type="text"
                                 id="couponId"
-                                onChange={(e) => setCouponId(e.target.value)}
-                                className="placeholder-gray-400 flex-1 p-2 text-black border border-gray-300 rounded-lg focus:ring-[#2E8B57] focus:border-[#2E8B57] transition uppercase"
+                                onChange={(e) => setCouponId(e.target.value.toUpperCase())}
+                                className={`placeholder-gray-400 text-black w-full p-2 border rounded-lg focus:ring-[#2E8B57] focus:border-[#2E8B57] transition uppercase ${
+                                    couponError ? "border-red-500" : "border-gray-300"
+                                }`}
                                 placeholder="MAKMUR-A1B2C3D4"
                             />
-                            <button 
-                                onClick={handleVerification}
-                                className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition"
-                            >
-                                Verifikasi
-                            </button>
+                            {couponError && (
+                            <p className="text-red-600 text-xs mt-1">{couponError}</p>
+                            )}
                         </div>
                         <p className="text-xs text-gray-500">Masukkan ID kupon yang Anda terima melalui email</p>
                         <div className="p-2 mt-1 bg-gray-100 border border-gray-300 rounded-md text-xs text-gray-700">
@@ -275,9 +298,9 @@ export default function CheckoutPage() {
 
                     <button
                     onClick={handlePayment}
-                    className="w-[1000px] py-3 bg-[#2E8B57] text-white font-bold text-lg rounded-xl shadow-lg hover:bg-emerald-700 transition duration-200 mx-auto flex items-center justify-center gap-2 text-center"
+                    className="lg:w-1/2 py-3 bg-[#2E8B57] text-white font-bold text-lg sm:w-full rounded-xl shadow-lg hover:bg-emerald-700 transition duration-200 mx-auto flex items-center justify-center gap-2 text-center"
                     >
-                    <Icon icon="icon-park-outline:tag" width="16" height="16" />
+                    <Icon icon="icon-park-outline:tag" width="24" height="24" />
                     Beli dengan Kupon
                     </button>
                 </div>

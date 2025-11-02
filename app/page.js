@@ -66,13 +66,15 @@ export default function App() {
     <div className="min-h-screen flex flex-col justify-between items-center p-12 bg-linear-to-b from-[#2E8B57] to-[#A9F0C5] text-white">
       {/* Logo dan nama aplikasi */}
       <header className="flex flex-col items-center mt-8">
-        <div className="text-6xl">🌱</div>
+        <div className="text-6xl">
+          <img src="/images/logo.svg" alt="Makmur Logo" className="w-24 h-24" />
+        </div>
         <h1 className="text-2xl font-semibold mt-2">Makmur</h1>
       </header>
 
       {/* Onboarding Card */}
-      <div className="w-full max-w-lg">
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden pt-12 pb-6 px-4">
+      <div className="w-full max-w-lg pt-4">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden pt-8 pb-6 px-4">
           <OnboardingSlide slide={currentSlide} />
         </div>
       </div>
@@ -90,7 +92,7 @@ export default function App() {
         </div>
 
       {/* Tombol Lanjut dan Kembali */}
-      <footer className="w-full max-w-lg flex flex-col items-center mb-8">
+      <footer className="w-full max-w-lg flex flex-col items-center mb-4">
         <div className="flex w-full space-x-4">
           {/* Tombol Kembali */}
           {currentStep > 0 && (
