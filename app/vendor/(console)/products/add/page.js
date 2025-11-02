@@ -184,6 +184,26 @@ export default function AddProductPage() {
           )}
         </div>
 
+        {/* Tanggal Dibuat */}
+        <div>
+          <label className="mb-2 block text-sm font-medium text-gray-700">
+            Tanggal Dibuat *
+          </label>
+          <input
+            type="datetime-local"
+            name="createdAt"
+            value={form.createdAt}
+            onChange={onChange}
+            step="1" // agar bisa mengatur detik
+            className={`placeholder-gray-500 w-full rounded-xl border px-4 py-2.5 text-sm outline-none ring-emerald-200 focus:bg-white focus:ring ${
+              errors.createdAt ? "bg-red-50 border-red-300" : "bg-gray-50"
+            }`}
+          />
+          {errors.createdAt && (
+            <p className="mt-1 text-sm text-red-600">{errors.createdAt}</p>
+          )}
+        </div>
+
         {/* Kategori */}
         <div>
           <label className="mb-2 block text-sm font-medium text-gray-700">
