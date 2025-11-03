@@ -1,17 +1,17 @@
-"use client"; // penting biar semua hook jalan di client
+"use client";
 
-export const dynamic = "force-dynamic"; // cegah SSG / prerender
+export const dynamic = "force-dynamic";
 
-import { Suspense } from "react";
 import AuthCard from "../components/AuthCard";
 import AuthForm from "../components/AuthForm";
+import { Suspense } from "react";
 
 export default function SignupPage() {
   return (
-    <Suspense fallback={<div className="text-center text-gray-600">Memuat halaman signup...</div>}>
-      <AuthCard>
+    <AuthCard>
+      <Suspense fallback={<div className="text-center text-gray-600">Memuat halaman signup...</div>}>
         <AuthForm mode="signup" defaultRole="vendor" />
-      </AuthCard>
-    </Suspense>
+      </Suspense>
+    </AuthCard>
   );
 }
