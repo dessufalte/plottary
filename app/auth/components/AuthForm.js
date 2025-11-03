@@ -1,24 +1,20 @@
 "use client";
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import RoleTabs from "./RoleTabs";
 import GoogleButton from "./GoogleButton";
+import { useRouter } from "next/navigation";
 
 export default function AuthForm({ mode = "login", defaultRole = "buyer" }) {
   const router = useRouter();
-  const q = useSearchParams();
-  const next = q.get("next");
-  const qRole = q.get("role"); // <- ambil role dari query
-
-  // default role: query ?role=vendor > prop defaultRole > "buyer"
-  const [role, setRole] = useState(qRole || defaultRole);
+  const [role, setRole] = useState(defaultRole);
+  
 
   const [vendorName, setVendorName] = useState("");
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
 
   const goHome = () => router.replace("/landingPage");
-  const goVendor = () => router.replace(next || "/vendor");
+  const goVendor = () => router.replace("/vendor");
 
   const submitBuyer = (e) => { e.preventDefault(); goHome(); };
   const submitVendor = (e) => {
