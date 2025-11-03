@@ -18,9 +18,6 @@ const DUMMY_PRODUCT = {
     name: "Salad Bowl Organik",
     vendor: "Kafe Hijau",
     rating: 4.6,
-    originalPrice: 45000,
-    discountedPrice: 20000,
-    discountPercentage: 56,
     imageUrl: "/images/saladBowlOrganik.png",
     description: "Salad segar dengan sayuran organik dan dressing pilihan. Cocok untuk diet sehat Anda.",
     couponCount: 2,
@@ -130,16 +127,6 @@ export default function ProductDetailPage() {
                             <span className="flex items-center bg-[#2E8B57] text-white text-xs font-semibold px-2 py-1 rounded-full ml-4">
                             <Icon icon="mdi:ticket" width="24" height="24" className="text-white mr-3" />
                             2 Kupon
-                            </span>
-                        </div>
-
-                        {/* Harga */}
-                        <div className="mb-4">
-                            <p className="text-3xl font-bold text-[#2E8B57] inline-block mr-3">
-                                {formatRupiah(product.discountedPrice)}
-                            </p>
-                            <span className="text-lg text-gray-400 line-through">
-                                {formatRupiah(product.originalPrice)}
                             </span>
                         </div>
 

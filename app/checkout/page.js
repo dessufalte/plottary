@@ -200,22 +200,6 @@ export default function CheckoutPage() {
                             </div>
                         </div>
                     </div>
-
-                    {/* Rincian Harga */}
-                    <div className="text-sm space-y-1">
-                        <div className="flex justify-between">
-                            <span className="text-gray-600">Harga Normal</span>
-                            <span className="text-gray-600 line-through">{formatRupiah(order.originalPrice)}</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-[#2E8B57] font-semibold">Hemat dengan Kupon</span>
-                            <span className="text-[#2E8B57] font-semibold">- {formatRupiah(order.discountAmount)}</span>
-                        </div>
-                        <div className="flex justify-between pt-2 border-t mt-2">
-                            <span className="text-md font-bold text-gray-800">Total</span>
-                            <span className="text-md font-bold text-gray-800">{formatRupiah(order.totalPrice)}</span>
-                        </div>
-                    </div>
                 </div>
 
                 {/* Cara Kerja Kupon */}

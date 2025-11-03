@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
+
 
 // helper
 const rupiah = (n) =>
@@ -14,32 +15,17 @@ const rupiah = (n) =>
 const initialTrans = [
   {
     id: "t1",
-    product: "Nasi Goreng Spesial",
-    buyer: "Budi S.",
+    product: "Salad Bowl Organik",
+    buyer: "Ariq",
     code: "MKM-001-ABC",
-    time: "14:30",
-    status: "Berhasil",
-  },
-  {
-    id: "t2",
-    product: "Ayam Geprek Jumbo",
-    buyer: "Siti R.",
-    code: "MKM-002-DEF",
-    time: "13:15",
-    status: "Berhasil",
-  },
-  {
-    id: "t3",
-    product: "Nasi Goreng Spesial",
-    buyer: "Ahmad F.",
-    code: "MKM-003-GHI",
-    time: "12:00",
     status: "Berhasil",
   },
 ];
 
 export default function TransactionsPage() {
   const [list, setList] = useState(initialTrans);
+
+  const videoRef = useRef(null);
 
   // UI state
   const [showModal, setShowModal] = useState(false);
@@ -113,7 +99,7 @@ export default function TransactionsPage() {
   return (
     <div className="p-8">
     {/* Banner validasi */}
-      <div className="mb-6 rounded-2xl bg-gradient-to-r from-emerald-700 to-emerald-400 p-6 text-white">
+      <div className="mb-6 rounded-2xl bg-linear-to-r from-emerald-700 to-emerald-400 p-6 text-white">
         <div className="flex items-center gap-3">
           <span className="grid h-10 w-10 place-items-center rounded-xl bg-white/15">
             <Icon icon="mdi:qrcode-scan" width={22} />
@@ -199,9 +185,18 @@ export default function TransactionsPage() {
               {/* SCANNING VIEW */}
               {scanState === "scanning" && (
                 <>
-                  <div className="mx-auto grid h-80 w-full max-w-md place-items-center rounded-xl bg-[#1f1f1f]">
-                    <div className="h-48 w-48 rounded-lg border-4 border-dashed border-white/70" />
-                    <div className="mt-6 text-sm text-white/80">Arahkan kamera ke QR code…</div>
+                  <div className="relative mx-auto grid h-80 w-full max-w-md place-items-center rounded-xl bg-black overflow-hidden">
+                    {/* Video Kamera */}
+                    <video
+                      ref={videoRef}
+                      autoPlay
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover"
+                    ></video>
+
+                    {/* Frame scanner */}
+                    <div className="relative z-10 h-48 w-48 rounded-lg border-4 border-dashed border-white/70" />
+                    <div className="relative z-10 mt-64 text-sm text-white/80">Arahkan kamera ke QR code…</div>
                   </div>
                 </>
               )}
