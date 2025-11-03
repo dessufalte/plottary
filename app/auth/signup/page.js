@@ -1,13 +1,17 @@
 "use client";
 
-// app/auth/signup/page.js
+export const dynamic = "force-dynamic";
+
+import { Suspense } from "react";
 import AuthCard from "../components/AuthCard";
 import AuthForm from "../components/AuthForm";
 
 export default function SignupPage() {
   return (
-    <AuthCard>
-      <AuthForm mode="signup" defaultRole="vendor" />
-    </AuthCard>
+    <Suspense fallback={<div className="text-center text-gray-600">Memuat halaman signup...</div>}>
+      <AuthCard>
+        <AuthForm mode="signup" defaultRole="vendor" />
+      </AuthCard>
+    </Suspense>
   );
 }
