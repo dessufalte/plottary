@@ -1,3 +1,5 @@
+"use client";
+
 // app/auth/signup/page.js
 import AuthCard from "../components/AuthCard";
 import AuthForm from "../components/AuthForm";
