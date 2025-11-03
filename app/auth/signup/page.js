@@ -3,6 +3,9 @@
 import { Suspense } from "react";
 import dynamicImport from "next/dynamic";
 
+// RE-INTRODUCE: Memastikan halaman ini selalu di-render secara dinamis (SSR).
+export const dynamic = "force-dynamic";
+
 const AuthCard = dynamicImport(() => import("../components/AuthCard"), {
   ssr: false,
 });
@@ -20,7 +23,6 @@ export default function SignupPage() {
       }
     >
       <AuthCard>
-        {/* Catatan: AuthForm akan menerima props mode="signup" dan defaultRole="vendor" */}
         <AuthForm mode="signup" defaultRole="vendor" />
       </AuthCard>
     </Suspense>
