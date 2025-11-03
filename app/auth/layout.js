@@ -1,6 +1,6 @@
-export const dynamic = "force-dynamic";
-
 export const metadata = { title: "Auth | Makmur" };
+
+// export const dynamic = "force-dynamic"; // Dihapus untuk mengizinkan SSG pada layout statis
 
 export default function AuthLayout({ children }) {
   return (
