@@ -13,19 +13,19 @@ const rupiah = (n) =>
 
 // status: 'expired' | 'eligible'
 const initialProducts = [
-  { id: 1, name: "Nasi Goreng",  category: "Siap Santap", priceNormal: 35000, priceDiscount: 15000, stock: 8,  minutesAgo: 9, image: "/nasi.png",  status: "eligible" },
-  { id: 2, name: "Roti Croissant",category: "Roti & Kue",  priceNormal: 25000, priceDiscount: 10000, stock: 12, minutesAgo: 9, image: "/roti.png",  status: "expired"  },
-  { id: 3, name: "Salad Bowl",    category: "Siap Santap", priceNormal: 45000, priceDiscount: 20000, stock: 5,  minutesAgo: 9, image: "/salad.png", status: "eligible" },
-  { id: 4, name: "Donat Aneka Rasa",   category: "Roti & Kue",  priceNormal: 30000, priceDiscount: 12000, stock: 6,  minutesAgo: 9, image: "/donat.png", status: "expired"  },
+  { id: 1, name: "Nasi Goreng",  category: "Siap Santap", stock: 8,  minutesAgo: 9, image: "/nasi.png",  status: "eligible" },
+  { id: 2, name: "Roti Croissant",category: "Roti & Kue", stock: 12, minutesAgo: 9, image: "/roti.png",  status: "expired"  },
+  { id: 3, name: "Salad Bowl",    category: "Siap Santap", stock: 5,  minutesAgo: 9, image: "/salad.png", status: "eligible" },
+  { id: 4, name: "Donat Aneka Rasa",   category: "Roti & Kue", stock: 6,  minutesAgo: 9, image: "/donat.png", status: "expired"  },
 ];
 
 const Badge = ({ status }) =>
   status === "expired" ? (
-    <span className="ml-auto rounded-full bg-red-100 px-2 py-[2px] text-[11px] font-medium text-red-600">
+    <span className="ml-auto rounded-full bg-red-100 px-2 py-2px text-11px font-medium text-red-600">
       Kadaluarsa
     </span>
   ) : (
-    <span className="ml-auto rounded-full bg-yellow-100 px-2 py-[2px] text-[11px] font-medium text-yellow-700">
+    <span className="ml-auto rounded-full bg-yellow-100 px-2 py-2 text-11 font-medium text-yellow-700">
       Layak
     </span>
   );
@@ -76,14 +76,12 @@ export default function ProductsPage() {
                   <h3 className="truncate text-[16px] font-semibold text-gray-800">{p.name}</h3>
                   <Badge status={p.status} />
                 </div>
-                <p className="mt-[2px] text-xs text-gray-500">{p.category}</p>
+                <p className="mt-2 text-xs text-gray-500">{p.category}</p>
 
-                <div className="mt-2 flex items-baseline gap-2">
-                  <span className="text-[16px] font-semibold text-emerald-700">
-                    {rupiah(p.priceDiscount)}
-                  </span>
-                  <span className="text-xs text-gray-400 line-through">{rupiah(p.priceNormal)}</span>
-                </div>
+                <span className="flex items-center mt-2 mb-2 bg-[#2E8B57] text-white text-xs font-semibold px-2 py-1 w-32 rounded-full">
+                  <Icon icon="mdi:ticket" width="24" height="24" className="text-white mr-3" />
+                  2 Kupon
+                </span>
 
                 <div className="mt-1 flex items-center gap-5 text-xs text-gray-500">
                   <span>Stok: {p.stock}</span>

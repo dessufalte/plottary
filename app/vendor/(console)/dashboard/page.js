@@ -6,7 +6,7 @@ export default function DashboardVendor() {
   return (
     <div className="p-8">
       {/* Total Pemasukan */}
-      <div className="mb-6 rounded-2xl bg-gradient-to-r from-emerald-700 to-emerald-500 p-6 text-white">
+      <div className="mb-6 rounded-2xl bg-linear-to-r from-emerald-700 to-emerald-500 p-6 text-white">
         <div className="flex items-start justify-between">
           <div>
             <p className="text-sm opacity-80">Total Pemasukan</p>

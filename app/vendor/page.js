@@ -57,7 +57,7 @@ export default function VendorPage() {
         </div>
 
         {/* ===== STATISTIK ===== */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-4 mt-8">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
           {[
             { icon: "mdi:store-outline", val: "2,500+", label: "Vendor Aktif" },
             { icon: "mdi:chart-line", val: "43%", label: "Kenaikan Revenue" },
