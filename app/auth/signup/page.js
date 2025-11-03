@@ -1,6 +1,6 @@
-"use client";
+"use client"; // penting biar semua hook jalan di client
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"; // cegah SSG / prerender
 
 import { Suspense } from "react";
 import AuthCard from "../components/AuthCard";
