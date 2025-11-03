@@ -1,16 +1,16 @@
 "use client";
 
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
-
-const AuthCard = dynamic(() => import("../components/AuthCard"), {
-  ssr: false,
-});
-const AuthForm = dynamic(() => import("../components/AuthForm"), {
-  ssr: false,
-});
+import dynamicImport from "next/dynamic";
 
 export const dynamic = "force-dynamic";
+
+const AuthCard = dynamicImport(() => import("../components/AuthCard"), {
+  ssr: false,
+});
+const AuthForm = dynamicImport(() => import("../components/AuthForm"), {
+  ssr: false,
+});
 
 export default function SignupPage() {
   return (
